@@ -17,9 +17,9 @@ namespace BakerHouseApp.Repositories
             return _items.Single(item => item.Id == id);
         }
 
-        public void Add(T item)
+        public void Add(T item)   
         {
-            item.Id = _items.Count + 1;
+            item.Id = _items.Count == 0 ? 1 : _items.Max(item => item.Id) + 1;
             _items.Add(item);
         }
 

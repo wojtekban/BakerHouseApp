@@ -1,8 +1,7 @@
 ﻿namespace BakerHouseApp.Entities
 {
-    public class RyeBread : WheatBread
+    public class RyeBread : Bread 
     {
-        public override string ToString() => base.ToString() + "  -- ciemne pieczywo";
-
+        public override string ToString() => base.ToString() + "  -- Ciemne pieczywo";
     }
 }
