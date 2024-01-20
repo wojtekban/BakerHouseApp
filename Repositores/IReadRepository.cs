@@ -1,6 +1,6 @@
 ﻿using BakerHouseApp.Entities;
 
-namespace BakerHouseApp.Repositories
+namespace BakerHouseApp.Repositores
 {
     public interface IReadRepository<out T> where T : class, IEntity
     {

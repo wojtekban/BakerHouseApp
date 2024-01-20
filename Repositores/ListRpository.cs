@@ -1,7 +1,7 @@
 ﻿using BakerHouseApp.Entities;
 using System.Runtime.InteropServices;
 
-namespace BakerHouseApp.Repositories
+namespace BakerHouseApp.Repositores
 {
     public class ListRepository<T> : IRepository<T> where T : class, IEntity, new()
     {

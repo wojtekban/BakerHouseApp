@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using BakerHouseApp.Entities;
 
-namespace BakerHouseApp.Repositories
+namespace BakerHouseApp.Repositores
 {
     public class SqlRepository<T> : IRepository<T> where T : class, IEntity, new()
     {
@@ -13,7 +13,8 @@ namespace BakerHouseApp.Repositories
             _dbContext = dbcontext;
             _dbSet = _dbContext.Set<T>();
         }
-
+        public event EventHandler<T>? ItemAdded;
+        public event EventHandler<T>? ItemRemove;
         public IEnumerable<T> GetAll()
         {
             return _dbSet.ToList();
@@ -27,16 +28,27 @@ namespace BakerHouseApp.Repositories
         public void Add(T item)
         {
             _dbSet.Add(item);
+            ItemAdded?.Invoke(this, item);
         }
 
         public void Remove(T item)
         {
             _dbSet.Remove(item);
+            ItemRemove?.Invoke(this, item);
         }
 
         public void Save()
         {
             _dbContext.SaveChanges();
+        }
+
+        public void WriteAllToConsole(IReadRepository<IEntity> repository)
+        {
+            var items = repository.GetAll();
+            foreach (var item in items)
+            {
+                Console.WriteLine(item);
+            }
         }
     }
 }
