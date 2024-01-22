@@ -20,7 +20,8 @@ while (true)
     Console.WriteLine("Press 2 to Add Rye Bread product");
     Console.WriteLine("Press 3 to show all Breads in memory");
     Console.WriteLine("Press 4 to show all Breads from in file");
-    Console.WriteLine("Press 5 to delete Rye Breads from file");
+    Console.WriteLine("Press 5 to delete Wheat Breads from file");
+    Console.WriteLine("Press 6 to delete Rye Breads from file");
     Console.WriteLine("To exit insert 'x' ");
     Console.WriteLine("Choose option again.");
     var userInPut = Console.ReadLine();
@@ -104,22 +105,42 @@ while (true)
                 }
 
                 break;
+
             case "3":
                 typeWheatBread.WriteAllToConsole(typeWheatBread);
                 typeRyeBread.WriteAllToConsole(typeRyeBread);
 
                 break;
+
             case "4":
                 typeToFileWheatBread.WriteAllConsoleFromFileWheatBread(typeToFileWheatBread);
                 typeToFileRyeBread.WriteAllConsoleFromFileRyeBread(typeToFileRyeBread);
 
                 break;
+
             case "5":
-                Console.WriteLine("Which name Bread you want delete ?");
-                Console.WriteLine("Enter the Id of user you want to delete");
+                Console.WriteLine("Which Wheat Bread you want delete ?");
+                Console.WriteLine("Enter the Id to delete");
                 try
+                
                 {
-                  //
+                    typeWheatBread.Remove(typeWheatBread.GetById(int.Parse(Console.ReadLine())));
+                    typeWheatBread.Save();
+                }
+                catch
+                {
+                    Console.WriteLine("wrong option");
+                } 
+                break;
+
+            case "6":
+                Console.WriteLine("Which Rye Bread you want delete ?");
+                Console.WriteLine("Enter the Id to delete");
+                try
+
+                {
+                    typeRyeBread.Remove(typeRyeBread.GetById(int.Parse(Console.ReadLine())));
+                    typeRyeBread.Save();
                 }
                 catch
                 {
@@ -133,6 +154,7 @@ while (true)
                 Console.WriteLine("Invalid operation");
                 break;
         }
+    
     }
     catch (Exception e)
     {

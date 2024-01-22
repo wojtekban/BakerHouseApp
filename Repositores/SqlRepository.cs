@@ -50,5 +50,6 @@ namespace BakerHouseApp.Repositores
                 Console.WriteLine(item);
             }
         }
+        public void Clear() { }
     }
 }
