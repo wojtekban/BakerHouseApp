@@ -3,16 +3,15 @@
 public abstract class DataGenerator : IDataGenerator
 {
     public abstract void ViewDataSourceInfo();
-    public abstract void AddWheatBread();
-    public abstract void AddRyeBread();
+    public abstract void AddBread();
+    public abstract void AddCustBread();
 
-    protected IEnumerable<WheatBread> GetWheatBread()
+    protected IEnumerable<Bread> GetBread()
     {
-        var wheatBread = new List<WheatBread>()
+        var Bread = new List<Bread>()
         {
-                new WheatBread()
+                new Bread()
                 {
-                        Id = 1,
                         Name = "Baltonowski",
                         Quantity = 5,
                         Weight = 500,
@@ -22,11 +21,10 @@ public abstract class DataGenerator : IDataGenerator
                         Calories = 1500,
                         StandardCost = 5.50M,
                         Price = 8.00M,
-                        Color = "Gold",
+                        Type = "Wheat",
                 },
-                new WheatBread()
+                new Bread()
                 {
-                        Id = 2,
                         Name = "Na maslance",
                         Quantity = 3,
                         Weight = 450,
@@ -36,11 +34,10 @@ public abstract class DataGenerator : IDataGenerator
                         Calories = 1300,
                         StandardCost = 6.50M,
                         Price = 8.50M,
-                        Color = "Brown",
+                        Type = "Wheat",
                 },
-                new WheatBread()
+                new Bread()
                 {
-                        Id = 3,
                         Name = "Dwarski",
                         Quantity = 10,
                         Weight = 440,
@@ -50,11 +47,10 @@ public abstract class DataGenerator : IDataGenerator
                         Calories = 1200,
                         StandardCost = 9.50M,
                         Price = 10.50M,
-                        Color = "Light gold",
+                        Type = "Wheat",
                 },
-                new WheatBread()
+                new Bread()
                 {
-                        Id = 4,
                         Name = "Rustykalny",
                         Quantity = 8,
                         Weight = 550,
@@ -64,11 +60,10 @@ public abstract class DataGenerator : IDataGenerator
                         Calories = 1600,
                         StandardCost = 9.50M,
                         Price = 11.50M,
-                        Color = "Gold",
+                        Type = "Wheat",
                 },
-                new WheatBread()
+                new Bread()
                 {
-                        Id = 5,
                         Name = "Wieloziarnisty",
                         Quantity = 7,
                         Weight = 350,
@@ -78,19 +73,10 @@ public abstract class DataGenerator : IDataGenerator
                         Calories = 980,
                         StandardCost = 4.50M,
                         Price = 6.50M,
-                        Color = "Brown",
-                }
-
-        };
-                 return wheatBread;
-    }
-    protected IEnumerable<RyeBread> GetRyeBread()
-    {
-        var ryeBread = new List<RyeBread>()
-        {
-                new RyeBread()
+                        Type = "Wheat",
+                },
+                new Bread()
                 {
-                        Id = 1,
                         Name = "Firmowy",
                         Quantity = 5,
                         Weight = 500,
@@ -100,11 +86,10 @@ public abstract class DataGenerator : IDataGenerator
                         Calories = 1500,
                         StandardCost = 5.50M,
                         Price = 8.00M,
-                        Color = "Gold",
+                        Type = "Rye",
                 },
-                new RyeBread()
+                new Bread()
                 {
-                        Id = 2,
                         Name = "Słonecznikowy",
                         Quantity = 3,
                         Weight = 450,
@@ -114,11 +99,10 @@ public abstract class DataGenerator : IDataGenerator
                         Calories = 1300,
                         StandardCost = 6.50M,
                         Price = 8.50M,
-                        Color = "Brown",
+                        Type = "Rye",
                 },
-                new RyeBread()
+                new Bread()
                 {
-                        Id = 3,
                         Name = "Pasterski",
                         Quantity = 10,
                         Weight = 440,
@@ -128,11 +112,10 @@ public abstract class DataGenerator : IDataGenerator
                         Calories = 1200,
                         StandardCost = 9.50M,
                         Price = 10.50M,
-                        Color = "Light gold",
+                        Type = "Rye",
                 },
-                new RyeBread()
+                new Bread()
                 {
-                        Id = 4,
                         Name = "Śniadaniowy",
                         Quantity = 8,
                         Weight = 550,
@@ -142,11 +125,10 @@ public abstract class DataGenerator : IDataGenerator
                         Calories = 1600,
                         StandardCost = 9.50M,
                         Price = 11.50M,
-                        Color = "Gold",
+                        Type = "Rye",
                 },
-                new RyeBread()
+                new Bread()
                 {
-                        Id = 5,
                         Name = "Nadworny",
                         Quantity = 7,
                         Weight = 350,
@@ -156,10 +138,27 @@ public abstract class DataGenerator : IDataGenerator
                         Calories = 980,
                         StandardCost = 4.50M,
                         Price = 6.50M,
-                        Color = "Brown",
+                        Type = "Rye",
                 }
 
         };
-        return ryeBread;
+                 return Bread;
+    }
+    protected IEnumerable<CustBread> GetCustBread()
+    {
+        var CustBread = new List<CustBread>()
+        {
+                new CustBread()
+                {
+                        CustName = "SPP Toruńska",
+                        AddressStreet = "torunska",
+                        AddressCityName = "Grudziądz",
+                        AddressZipCode = 86300M,
+                        NipNum = 8791592124M,
+                }
+
+
+        };
+        return CustBread;
     }
 }

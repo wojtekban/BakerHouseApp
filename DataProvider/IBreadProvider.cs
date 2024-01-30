@@ -1,53 +1,55 @@
 ﻿namespace BakerHouseApp.DataProvider;
 
-internal interface IBreadProvider
+public interface IBreadProvider
 {
     // SELECT
     decimal GetMaximumPriceOfAllBread();
     decimal GetMinimumPriceOfAllBread();
-    List<WheatBread> GetSpecificColumns();
-    List<string> GetUniqueBreadColors();
+    List<Bread> GetSpecificColumns();
+    List<CustBread> GetSpecificCustBreadColumns();
+    List<string> GetUniqueBreadType();
     string AnonymousClass();
 
     // ORDER BY
-    List<WheatBread> OrderByNameAndCalories();
-    List<WheatBread> OrderByName();
-    List<WheatBread> OrderByNameDescending();
-    List<WheatBread> OrderByColorAndName();
-    List<WheatBread> OrderByColorAndNameDesc();
+    List<Bread> OrderByNameAndCalories();
+    List<Bread> OrderByName();
+    List<CustBread> OrderByCustName();
+    List<Bread> OrderByNameDescending();
+    List<Bread> OrderByTypeAndName();
+    List<Bread> OrderByTypeAndNameDesc();
  
     // WHERE
-    List<WheatBread> WhereStartsWith(string prefix);
-    List<WheatBread> WhereStartsWithAndPriceIsGreaterThan(string prefix, decimal price);
-    List<WheatBread> WhereColorIs(string color);
-    List<WheatBread> WhereStartsWithAndCostIsGreaterThan(string prefix, decimal cost);
+    List<Bread> WhereStartsWith(string prefix);
+    List<Bread> WhereStartsWithAndPriceIsGreaterThan(string prefix, decimal price);
+    List<Bread> WhereTypeIs(string type);
+    List<Bread> WhereStartsWithAndCostIsGreaterThan(string prefix, decimal cost);
 
     // FIRST, LAST, SINGLE
-    WheatBread SingleById(int id);
-    WheatBread SingleOrDefaultById(int id);
-    WheatBread FirstByColor(string color);
-    WheatBread? FirstOrDefaultByColor(string color);
-    WheatBread FirstOrDefaultByColorWithDefault(string color);
-    WheatBread LastByColor(string color);
+    Bread SingleById(int id);
+    Bread SingleOrDefaultById(int id);
+    Bread FirstByType(string color);
+    Bread? FirstOrDefaultByType(string type);
+    Bread FirstOrDefaultByTypeWithDefault(string type);
+    Bread LastByType(string type);
 
     // TAKE
-    List<WheatBread> TakeWheatBread(int howMany);
-    List<WheatBread> TakeWheatBread(Range range);
-    List<WheatBread> TakeWheatBreadWhileExpirationDate(DateTime date);
-    List<WheatBread> TakeWheatBreadWhileNameStartsWith(string prefix);
+    List<Bread> TakeBread(int howMany);
+    List<Bread> TakeBread(Range range);
+    List<Bread> TakeBreadWhileExpirationDate(DateTime date);
+    List<Bread> TakeBreadWhileNameStartsWith(string prefix);
 
      // SKIP
-    List<WheatBread> SkipWheatBread(int howMany);
-    List<WheatBread> SkipPlayersWhileExpirationDate(DateTime date);
-    List<WheatBread> SkipWheatBreadWhileNameStartsWith(string prefix);
+    List<Bread> SkipBread(int howMany);
+    List<Bread> SkipPlayersWhileExpirationDate(DateTime date);
+    List<Bread> SkipBreadWhileNameStartsWith(string prefix);
  
      // DISTINCT
     List<double> DistinctAllCalories();
-    List<WheatBread> DistinctByCalories();
-    List<string> DistinctAllColors();
-    List<WheatBread> DistinctByColors();
+    List<Bread> DistinctByCalories();
+    List<string> DistinctAllType();
+    List<Bread> DistinctByType();
 
     // CHUNK
-    List<WheatBread[]> ChunkPlayers(int size);
+    List<Bread[]> ChunkPlayers(int size);
 }
 

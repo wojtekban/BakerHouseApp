@@ -1,101 +1,101 @@
-﻿using System.Text.Json;
+﻿//using System.Text.Json;
 
-namespace BakerHouseApp.Data.Repositores;
+//namespace BakerHouseApp.Data.Repositores;
 
-internal class RepositoryToFileJson<T> : IRepository<T> where T : class, IEntity, new()
-{
+//internal class RepositoryToFileJson<T> : IRepository<T> where T : class, IEntity, new()
+//{
 
-    private readonly List<T> _items = new();
-    private int lastUsedId = 1;
-    private readonly string path = $"{typeof(T).Name}_save.json";
+//    private readonly List<T> _items = new();
+//    private int lastUsedId = 1;
+//    private readonly string path = $"{typeof(T).Name}_save.json";
     
-    public event EventHandler<T>? ItemAdded;
-    public event EventHandler<T>? ItemRemoved;
+//    public event EventHandler<T>? ItemAdded;
+//    public event EventHandler<T>? ItemRemoved;
 
-    //private readonly List<T> _items2 = new();
-    //protected static readonly string fileName = "WheadBreadFileWrite";
-    //protected static readonly string fileName2 = "RyeBreadFileWrite";
-    //protected static readonly string uRLFile = $@"C:\Users\Wojtek\source\repos\wojtekban\BakerHouseApp\DataBase\{fileName}.json";
-    //protected static readonly string uRLFile2 = $@"C:\Users\Wojtek\source\repos\wojtekban\BakerHouseApp\DataBase\{fileName2}.json";
+//    //private readonly List<T> _items2 = new();
+//    //protected static readonly string fileName = "WheadBreadFileWrite";
+//    //protected static readonly string fileName2 = "RyeBreadFileWrite";
+//    //protected static readonly string uRLFile = $@"C:\Users\Wojtek\source\repos\wojtekban\BakerHouseApp\DataBase\{fileName}.json";
+//    //protected static readonly string uRLFile2 = $@"C:\Users\Wojtek\source\repos\wojtekban\BakerHouseApp\DataBase\{fileName2}.json";
 
-    //public delegate void ItemAdded(object item);
+//    //public delegate void ItemAdded(object item);
 
 
 
-    //private readonly ItemAdded _itemAddedCallback;
+//    //private readonly ItemAdded _itemAddedCallback;
 
-    //private readonly Action<T> itemAddedCallback;
-    //private readonly Action<T> itemRemovedCallback;
+//    //private readonly Action<T> itemAddedCallback;
+//    //private readonly Action<T> itemRemovedCallback;
 
-    public IEnumerable<T> GetAll()
-    {
-        return _items.ToList();
-    }
+//    public IEnumerable<T> GetAll()
+//    {
+//        return _items.ToList();
+//    }
 
-    public void Add(T item)
-    {
-        if (_items.Count == 0)
-        {
-            item.Id = lastUsedId;
-            lastUsedId++;
-        }
-        else if (_items.Count > 0)
-        {
-            lastUsedId = _items[_items.Count - 1].Id;
-            item.Id = ++lastUsedId;
-        }
+//    public void Add(T item)
+//    {
+//        if (_items.Count == 0)
+//        {
+//            item.Id = lastUsedId;
+//            lastUsedId++;
+//        }
+//        else if (_items.Count > 0)
+//        {
+//            lastUsedId = _items[_items.Count - 1].Id;
+//            item.Id = ++lastUsedId;
+//        }
 
-        _items.Add(item);
-        ItemAdded?.Invoke(this, item);
-    }
+//        _items.Add(item);
+//        ItemAdded?.Invoke(this, item);
+//    }
 
-    public T? GetById(int id)
-    {
-        var itemById = _items.SingleOrDefault(item => item.Id == id);
-        if (itemById == null)
-        {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine($"Object {typeof(T).Name} with id {id} not found.");
-            Console.ResetColor();
-        }
-        return itemById;
-    }
+//    public T? GetById(int id)
+//    {
+//        var itemById = _items.SingleOrDefault(item => item.Id == id);
+//        if (itemById == null)
+//        {
+//            Console.ForegroundColor = ConsoleColor.Red;
+//            Console.WriteLine($"Object {typeof(T).Name} with id {id} not found.");
+//            Console.ResetColor();
+//        }
+//        return itemById;
+//    }
 
-    public void Remove(T item)
-    {
-        _items.Remove(item);
-        ItemRemoved?.Invoke(this, item);
-    }
+//    public void Remove(T item)
+//    {
+//        _items.Remove(item);
+//        ItemRemoved?.Invoke(this, item);
+//    }
 
-    public void Save()
-    {
-        File.Delete(path);
-        var objectsSerialized = JsonSerializer.Serialize<IEnumerable<T>>(_items);
-        File.WriteAllText(path, objectsSerialized);
-    }
-    public IEnumerable<T> Read()
-    {
-        if (File.Exists(path))
-        {
-            var objectsSerialized = File.ReadAllText(path);
-            var deserializedObjects = JsonSerializer.Deserialize<IEnumerable<T>>(objectsSerialized);
-            if (deserializedObjects != null)
-            {
-                foreach (var item in deserializedObjects)
-                {
-                    _items.Add(item);
-                }
-            }
-        }
-        return _items;
-    }
+//    public void Save()
+//    {
+//        File.Delete(path);
+//        var objectsSerialized = JsonSerializer.Serialize<IEnumerable<T>>(_items);
+//        File.WriteAllText(path, objectsSerialized);
+//    }
+//    public IEnumerable<T> Read()
+//    {
+//        if (File.Exists(path))
+//        {
+//            var objectsSerialized = File.ReadAllText(path);
+//            var deserializedObjects = JsonSerializer.Deserialize<IEnumerable<T>>(objectsSerialized);
+//            if (deserializedObjects != null)
+//            {
+//                foreach (var item in deserializedObjects)
+//                {
+//                    _items.Add(item);
+//                }
+//            }
+//        }
+//        return _items;
+//    }
 
-    public int GetListCount()
-    {
-        return _items.Count;
-    }
+//    public int GetListCount()
+//    {
+//        return _items.Count;
+//    }
 
-}
+//}
 //    public void Add(T itemToSave)
 //    {
 //        itemToSave.Id = _items.Count + 1;

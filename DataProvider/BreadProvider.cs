@@ -2,48 +2,66 @@
 
 namespace BakerHouseApp.DataProvider;
 
-internal class BreadProvider : IBreadProvider
+public class BreadProvider : IBreadProvider
 {
-    private readonly IRepository<WheatBread> _wheatBreadRepository;
-        public BreadProvider(IRepository<WheatBread> wheatBreadRepository)
+    private readonly IRepository<Bread> _breadRepository;
+    private readonly IRepository<CustBread> _custBreadRepository;
+
+    public BreadProvider(IRepository<Bread> breadRepository, IRepository<CustBread> custBreadRepository)
     {
-        _wheatBreadRepository = wheatBreadRepository;
+        _breadRepository = breadRepository;
+        _custBreadRepository = custBreadRepository;
     }
 
     // SELECT
     public decimal GetMaximumPriceOfAllBread()
     {
-        var wheatBreads = _wheatBreadRepository.GetAll();
-        return wheatBreads.Select(x => x.Price).Max();
+        var breads = _breadRepository.GetAll();
+        return breads.Select(x => x.Price).Max();
     }
     public decimal GetMinimumPriceOfAllBread()
     {
-        var wheatBreads = _wheatBreadRepository.GetAll();
-        return wheatBreads.Select(x => x.Price).Min();
+        var breads = _breadRepository.GetAll();
+        return breads.Select(x => x.Price).Min();
     }
-    public List<WheatBread> GetSpecificColumns()
+    public List<Bread> GetSpecificColumns()
     {
-        var wheatBreads = _wheatBreadRepository.GetAll();
-        var list = wheatBreads.Select(x => new WheatBread
+        var breads = _breadRepository.GetAll();
+        var list = breads.Select(x => new Bread
         {
             Id = x.Id,
             Name = x.Name,
-            Color = x.Color,
+            Type = x.Type,
             StandardCost = x.StandardCost,
             Price = x.Price
         }).ToList();
 
         return list;
     }
-    public List<string> GetUniqueBreadColors()
+    public List<CustBread> GetSpecificCustBreadColumns()
     {
-        var wheatBreads = _wheatBreadRepository.GetAll();
-        return wheatBreads.Select(x => x.Color).Distinct().ToList()!;
+        var custBreads = _custBreadRepository.GetAll();
+        var list = custBreads.Select(x => new CustBread
+        {
+            Id = x.Id,
+            CustName = x.CustName,
+            AddressStreet = x.AddressStreet,
+            AddressCityName = x.AddressCityName,
+            AddressZipCode = x.AddressZipCode,
+            NipNum = x.NipNum
+        }).ToList();
+
+        return list;
+    }
+    public List<string> GetUniqueBreadType()
+    {
+        var breads = _breadRepository.GetAll();
+        return breads.Select(x => x.Type).Distinct().ToList()!;
     }
     public string AnonymousClass()
     {
-        var wheatBreads = _wheatBreadRepository.GetAll();
-        var list = wheatBreads.Select(x => new
+        var breads = _breadRepository.GetAll();
+        var list = breads.Select(x => new
         {
             Name = x.Name,
             Weight = x.Weight,
@@ -51,216 +69,221 @@ internal class BreadProvider : IBreadProvider
         }).ToList();
 
         StringBuilder sb = new StringBuilder();
-        foreach (var wheatBread in list)
+        foreach (var Bread in list)
         {
-            sb.AppendLine($"{wheatBread.Name}");
-            sb.AppendLine($"{wheatBread.Weight}");
-            sb.AppendLine($"{wheatBread.Price}");
+            sb.AppendLine($"{Bread.Name}");
+            sb.AppendLine($"{Bread.Weight}");
+            sb.AppendLine($"{Bread.Price}");
             sb.AppendLine();
         }
         return sb.ToString();
     }
 
     // ORDER BY
-    public List<WheatBread> OrderByNameAndCalories()
+    public List<Bread> OrderByNameAndCalories()
     {
-        var wheatBreads = _wheatBreadRepository.GetAll();
-        return wheatBreads.OrderBy(x => x.Name)
+        var breads = _breadRepository.GetAll();
+        return breads.OrderBy(x => x.Name)
             .ThenBy(x => x.Calories).ToList();
     }
-    public List<WheatBread> OrderByColorAndName()
+    public List<Bread> OrderByTypeAndName()
     {
-        var wheatBreads = _wheatBreadRepository.GetAll();
-        return wheatBreads.OrderBy(x => x.Color)
+        var breads = _breadRepository.GetAll();
+        return breads.OrderBy(x => x.Type)
             .ThenBy(x => x.Name).ToList();
     }
-    public List<WheatBread> OrderByColorAndNameDesc()
+    public List<Bread> OrderByTypeAndNameDesc()
     {
-        var wheatBreads = _wheatBreadRepository.GetAll();
-        return wheatBreads.OrderByDescending(x => x.Color)
+        var breads = _breadRepository.GetAll();
+        return breads.OrderByDescending(x => x.Type)
             .ThenBy(x => x.Name).ToList();
     }
-    public List<WheatBread> OrderByName()
+    public List<Bread> OrderByName()
     {
-        var wheatBreads = _wheatBreadRepository.GetAll();
-        return wheatBreads.OrderBy(x => x.Name).ToList();
+        var breads = _breadRepository.GetAll();
+        return breads.OrderBy(x => x.Name).ToList();
     }
-    public List<WheatBread> OrderByNameDescending()
+    public List<CustBread> OrderByCustName()
     {
-        var wheatBreads = _wheatBreadRepository.GetAll();
-        return wheatBreads.OrderByDescending(x => x.Name).ToList();
+        var custBreads = _custBreadRepository.GetAll();
+        return custBreads.OrderBy(x => x.CustName).ToList();
+    }
+    public List<Bread> OrderByNameDescending()
+    {
+        var breads = _breadRepository.GetAll();
+        return breads.OrderByDescending(x => x.Name).ToList();
     }
 
     // WHERE
-    public List<WheatBread> WhereStartsWith(string prefix)
+    public List<Bread> WhereStartsWith(string prefix)
     {
-        var wheatBreads = _wheatBreadRepository.GetAll();
-        return wheatBreads.Where(x => x.Name!.StartsWith(prefix)).ToList();
+        var breads = _breadRepository.GetAll();
+        return breads.Where(x => x.Name!.StartsWith(prefix)).ToList();
     }
-    public List<WheatBread> WhereStartsWithAndPriceIsGreaterThan(string prefix, decimal cost)
+    public List<Bread> WhereStartsWithAndPriceIsGreaterThan(string prefix, decimal cost)
     {
-        var wheatBreads = _wheatBreadRepository.GetAll();
-        return wheatBreads.Where(x => x.Name!.StartsWith(prefix) && x.Price > cost).ToList();
+        var breads = _breadRepository.GetAll();
+        return breads.Where(x => x.Name!.StartsWith(prefix) && x.Price > cost).ToList();
     }
-    public List<WheatBread> WhereColorIs(string color)
+    public List<Bread> WhereTypeIs(string type)
     {
-        var wheatBreads = _wheatBreadRepository.GetAll();
-        return wheatBreads.Where(x => x.Color == "Gold").ToList();
+        var breads = _breadRepository.GetAll();
+        return breads.Where(x => x.Type == "Gold").ToList();
     }
-    public List<WheatBread> WhereStartsWithAndCostIsGreaterThan(string prefix, decimal cost)
+    public List<Bread> WhereStartsWithAndCostIsGreaterThan(string prefix, decimal cost)
     {
-        var wheatBreads = _wheatBreadRepository.GetAll();
-        return wheatBreads.Where(x => x.Name!.StartsWith(prefix) && x.StandardCost > cost).ToList();
+        var breads = _breadRepository.GetAll();
+        return breads.Where(x => x.Name!.StartsWith(prefix) && x.StandardCost > cost).ToList();
     }
 
     // FIRST, LAST, SINGLE
-    public WheatBread SingleById(int id)
+    public Bread SingleById(int id)
     {
-        var wheatBreads = _wheatBreadRepository.GetAll();
-        return wheatBreads.Single(x => x.Id == id);
+        var breads = _breadRepository.GetAll();
+        return breads.Single(x => x.Id == id);
     }
 
-    public WheatBread SingleOrDefaultById(int id)
+    public Bread SingleOrDefaultById(int id)
     {
-        var wheatBreads = _wheatBreadRepository.GetAll();
-        var wheatBread = wheatBreads.SingleOrDefault(x => x.Id == id);
-        if (wheatBread is null)
+        var breads = _breadRepository.GetAll();
+        var Bread = breads.SingleOrDefault(x => x.Id == id);
+        if (Bread is null)
         {
             Console.WriteLine($"Bread with id {id} NOT FOUND");
         }
-        return wheatBread!;
+        return Bread!;
     }
-    public WheatBread FirstByColor(string color)
+    public Bread FirstByType(string type)
     {
-        var wheatBreads = _wheatBreadRepository.GetAll();
-        return wheatBreads.First(x => x.Color == color);
+        var breads = _breadRepository.GetAll();
+        return breads.First(x => x.Type == type);
     }
-    public WheatBread? FirstOrDefaultByColor(string color)
+    public Bread? FirstOrDefaultByType(string type)
     {
-        var wheatBreads = _wheatBreadRepository.GetAll();
-        var player = wheatBreads.FirstOrDefault(x => x.Color == color);
-        if (player is null)
+        var breads = _breadRepository.GetAll();
+        var Bread = breads.FirstOrDefault(x => x.Type == type);
+        if (Bread is null)
         {
-            Console.WriteLine($"There's no Bread with ncolor {color}.");
+            Console.WriteLine($"There's no Bread with ncolor {type}.");
         }
 
-        return player!;
+        return Bread!;
     }
-    public WheatBread FirstOrDefaultByColorWithDefault(string color)
+    public Bread FirstOrDefaultByTypeWithDefault(string type)
     {
-        var wheatBreads = _wheatBreadRepository.GetAll();
-        return wheatBreads
+        var breads = _breadRepository.GetAll();
+        return breads
                .FirstOrDefault(
-               x => x.Color == color,
-               new WheatBread { Id = -1, Name = "NOT FOUND" });
+               x => x.Type == type,
+               new Bread { Id = -1, Name = "NOT FOUND" });
     }
-    public WheatBread LastByColor(string color)
+    public Bread LastByType(string type)
     {
-        var wheatBreads = _wheatBreadRepository.GetAll();
-        return wheatBreads.Last(x => x.Color == color);
+        var breads = _breadRepository.GetAll();
+        return breads.Last(x => x.Type == type);
     }
 
     // TAKE
-    public List<WheatBread> TakeWheatBread(int howMany)
+    public List<Bread> TakeBread(int howMany)
     {
-        var wheatBreads = _wheatBreadRepository.GetAll();
-                return wheatBreads
+        var breads = _breadRepository.GetAll();
+                return breads
                 .OrderByDescending(x => x.DateOfProduction)
                 .Take(howMany)
                 .ToList();
     }
-    public List<WheatBread> TakeWheatBread(Range range)
+    public List<Bread> TakeBread(Range range)
     {
-        var wheatBreads = _wheatBreadRepository.GetAll();
-                 return wheatBreads
+        var breads = _breadRepository.GetAll();
+                 return breads
                  .OrderBy(x => x.Name)
-                 .ThenBy(x => x.Color)
+                 .ThenBy(x => x.Type)
                  .Take(range)
                  .ToList();
     }
-    public List<WheatBread> TakeWheatBreadWhileExpirationDate(DateTime date)
+    public List<Bread> TakeBreadWhileExpirationDate(DateTime date)
     {
-        var wheatBreads = _wheatBreadRepository.GetAll();
-                 return wheatBreads
+        var breads = _breadRepository.GetAll();
+                 return breads
                  .OrderByDescending(x => x.ExpirationDate)
                  .TakeWhile(x => x.ExpirationDate >= date)
                  .ToList();
     }
-    public List<WheatBread> TakeWheatBreadWhileNameStartsWith(string prefix)
+    public List<Bread> TakeBreadWhileNameStartsWith(string prefix)
     {
-        var wheatBreads = _wheatBreadRepository.GetAll();
-              return wheatBreads
+        var breads = _breadRepository.GetAll();
+              return breads
              .OrderBy(x => x.Name)
              .TakeWhile(x => x.Name!.StartsWith(prefix))
              .ToList();
     }
 
     // SKIP
-    public List<WheatBread> SkipWheatBread(int howMany)
+    public List<Bread> SkipBread(int howMany)
     {
-        var wheatBreads = _wheatBreadRepository.GetAll();
-              return wheatBreads
+        var breads = _breadRepository.GetAll();
+              return breads
              .Skip(howMany)
              .ToList();
     }
-    public List<WheatBread> SkipPlayersWhileExpirationDate(DateTime date)
+    public List<Bread> SkipPlayersWhileExpirationDate(DateTime date)
     {
-        var wheatBreads = _wheatBreadRepository.GetAll();
-                 return wheatBreads.OrderByDescending(x => x.ExpirationDate)
+        var breads = _breadRepository.GetAll();
+                 return breads.OrderByDescending(x => x.ExpirationDate)
                 .SkipWhile(x => x.ExpirationDate >= date)
                 .ToList();
     }
-    public List<WheatBread> SkipWheatBreadWhileNameStartsWith(string prefix)
+    public List<Bread> SkipBreadWhileNameStartsWith(string prefix)
     {
-        var wheatBreads = _wheatBreadRepository.GetAll();
-        var wheatBread = _wheatBreadRepository.GetAll();
-        return wheatBreads
+        var breads = _breadRepository.GetAll();
+        var Bread = _breadRepository.GetAll();
+        return breads
             .OrderBy(x => x.Name)
             .SkipWhile(x => x.Name!.StartsWith(prefix))
             .ToList();
     }
    
     // DISTINCT
-    public List<string> DistinctAllColors()
+    public List<string> DistinctAllType()
     {
-        var wheatBreads = _wheatBreadRepository.GetAll();
-              return wheatBreads
-             .Select(x => x.Color!)
+        var breads = _breadRepository.GetAll();
+              return breads
+             .Select(x => x.Type!)
              .Distinct()
              .OrderBy(x => x)
              .ToList();
     }
-    public List<WheatBread> DistinctByColors()
+    public List<Bread> DistinctByType()
     {
-        var wheatBreads = _wheatBreadRepository.GetAll();
-                  return wheatBreads
-                 .DistinctBy(x => x.Color)
-                 .OrderBy(x => x.Color)
+        var breads = _breadRepository.GetAll();
+                  return breads
+                 .DistinctBy(x => x.Type)
+                 .OrderBy(x => x.Type)
                  .ToList();
     }
     public List<double> DistinctAllCalories()
     {
-        var wheatBreads = _wheatBreadRepository.GetAll();
-        return wheatBreads
+        var breads = _breadRepository.GetAll();
+        return breads
                 .Select(x => x.Calories!)
                 .Distinct()
                 .OrderBy(x => x)
                 .ToList();
     }
-    public List<WheatBread> DistinctByCalories()
+    public List<Bread> DistinctByCalories()
     {
-        var wheatBreads = _wheatBreadRepository.GetAll();
-        return wheatBreads
+        var breads = _breadRepository.GetAll();
+        return breads
                 .DistinctBy(x => x.Calories)
                 .OrderBy(x => x.Calories)
                 .ToList();
     }
 
     // CHUNK
-    public List<WheatBread[]> ChunkPlayers(int size)
+    public List<Bread[]> ChunkPlayers(int size)
     {
-        var wheatBreads = _wheatBreadRepository.GetAll();
-        return wheatBreads.Chunk(size).ToList();
+        var breads = _breadRepository.GetAll();
+        return breads.Chunk(size).ToList();
     }
   
 }

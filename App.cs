@@ -16,9 +16,10 @@ public class App : IApp // main app
         public void Run()
         {
             _dataGenerator.ViewDataSourceInfo();
-            _dataGenerator.AddWheatBread();
-            _dataGenerator.AddRyeBread();
-        }
+            _dataGenerator.AddBread();
+            _dataGenerator.AddCustBread();
+            _userCommunication.UserChoice();
+    }
 }
 
 

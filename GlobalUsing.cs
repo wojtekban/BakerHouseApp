@@ -7,3 +7,6 @@ global using BakerHouseApp.Data.Entities.Extensions;
 global using BakerHouseApp.Data.Repositores;
 global using BakerHouseApp.Data.Repositores.Extensions;
 global using BakerHouseApp.DataProvider;
+global using System.Globalization;
+global using System.Text.Json;
+global using BakerHouseApp.Services;

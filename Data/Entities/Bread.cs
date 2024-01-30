@@ -11,7 +11,7 @@ public class Bread : EntityBase
     public double Calories { get; set; }
     public decimal StandardCost { get; set; }
     public decimal Price { get; set; }
-    public string? Color { get; set; }
+    public string? Type { get; set; }
 
     public override string ToString()
     {
@@ -22,12 +22,12 @@ public class Bread : EntityBase
         sb.AppendLine($"    Weight: {Weight} g    Data Change: {Date}    Expiration Date Bread: {ExpirationDate}");
         sb.AppendLine($"    Date Of Production: {DateOfProduction}     Calories: {Calories} KCAL");
         sb.AppendLine($"    StandarCost: {StandardCost}$     Price: {Price}$");
-        sb.Append($"    Color: {Color}");
+        sb.Append($"    Type: {Type}");
 
         return sb.ToString();
     }
 }
 
-
+//ToShortDateString()
 // public override string ToString() => $"Id: {Id}, Data zmian: {Data}, Nazwa pieczywa: {Name}, Ilość pieczywa: {Quantity},  Waga pieczywa: {Weight}g ";
 

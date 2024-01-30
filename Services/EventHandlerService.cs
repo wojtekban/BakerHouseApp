@@ -2,51 +2,51 @@
 
 public class EventHandlerService : IEventHandlerService
 {
-    private readonly IRepository<WheatBread> _wheatBreadRepository;
-    private readonly IRepository<RyeBread> _ryeBreadRepository;
-    public EventHandlerService(IRepository<WheatBread> wheatBreadRepository, IRepository<RyeBread> ryeBreadRepository)
+    private readonly IRepository<Bread> _breadRepository;
+    private readonly IRepository<CustBread> _custBreadRepository;
+    public EventHandlerService(IRepository<Bread> breadRepository, IRepository<CustBread> custBreadRepository)
     {
-        _wheatBreadRepository = wheatBreadRepository;
-        _ryeBreadRepository = ryeBreadRepository;
+        _breadRepository = breadRepository;
+        _custBreadRepository = custBreadRepository;
     }
 
     public void SubscribeToEvents()
     {
-        _wheatBreadRepository.ItemAdded += WheatBreadRepositoryOnItemAdded;
-        _wheatBreadRepository.ItemRemoved += WheatBreadRepositoryOnItemRemoved;
-        _ryeBreadRepository.ItemAdded += RyeBreadRepositoryOnItemAdded;
-        _ryeBreadRepository.ItemRemoved += RyeBreadRepositoryOnItemRemoved;
+        _breadRepository.ItemAdded += BreadRepositoryOnItemAdded;
+        _breadRepository.ItemRemoved += BreadRepositoryOnItemRemoved;
+        _custBreadRepository.ItemAdded += CustBreadRepositoryOnItemAdded;
+        _custBreadRepository.ItemRemoved += CustBreadRepositoryOnItemRemoved;
     }
 
-    private void WheatBreadRepositoryOnItemAdded(object? sender, WheatBread e)
+    private void BreadRepositoryOnItemAdded(object? sender, Bread e)
     {
-        AddAuditInfo(e, "WHEAT BREAD ADDED");
+        AddAuditInfo(e, "BREAD ADDED");
         Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine($"Bread\n{e}\nadded successfully.\n");
         Console.ResetColor();
     }
 
-    private void WheatBreadRepositoryOnItemRemoved(object? sender, WheatBread e)
+    private void BreadRepositoryOnItemRemoved(object? sender, Bread e)
     {
-        AddAuditInfo(e, "WHEAT BREAD REMOVED");
+        AddAuditInfo(e, "BREAD REMOVED");
         Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine($"Bread\n{e}\nremoved successfully.\n");
         Console.ResetColor();
     }
 
-    private void RyeBreadRepositoryOnItemAdded(object? sender, RyeBread e)
+    private void CustBreadRepositoryOnItemAdded(object? sender, CustBread e)
     {
-        AddAuditInfo(e, "RYE BREAD ADDED");
+        AddAuditInfo(e, "CUST BREAD ADDED");
         Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine($"Rye Bread\n{e}\nadded successfully.\n");
+        Console.WriteLine($"Cust Bread\n{e}\nadded successfully.\n");
         Console.ResetColor();
     }
 
-    private void RyeBreadRepositoryOnItemRemoved(object? sender, RyeBread e)
+    private void CustBreadRepositoryOnItemRemoved(object? sender, CustBread e)
     {
-        AddAuditInfo(e, "RYE BREAD REMOVED");
+        AddAuditInfo(e, "CUST BREAD REMOVED");
         Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine($"Rye Bread\n{e}\nremoved successfully.\n");
+        Console.WriteLine($"Cust Bread\n{e}\nremoved successfully.\n");
         Console.ResetColor();
     }
     private void AddAuditInfo<T>(T e, string info) where T : class, IEntity

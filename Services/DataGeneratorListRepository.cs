@@ -1,13 +1,13 @@
 ﻿namespace BakerHouseApp.Services;
 
-public class DataGeneratorListRepository : DataGenerator, IDataGenerator
+public class DataGeneratorListRepository : DataGenerator
 {
-    private readonly IRepository<WheatBread> _wheatBreadRepository;
-    private readonly IRepository<RyeBread> _ryeBreadRepository;
-    public DataGeneratorListRepository(IRepository<WheatBread> wheatBreadRepository, IRepository<RyeBread> ryeBreadRepository)
+    private readonly IRepository<Bread> _breadRepository;
+    private readonly IRepository<CustBread> _custBreadRepository;
+    public DataGeneratorListRepository(IRepository<Bread> breadRepository, IRepository<CustBread> custBreadRepository)
     {
-        _wheatBreadRepository = wheatBreadRepository;
-        _ryeBreadRepository = ryeBreadRepository;
+        _breadRepository = breadRepository;
+        _custBreadRepository = custBreadRepository;
     }
 
     public override void ViewDataSourceInfo()
@@ -18,27 +18,27 @@ public class DataGeneratorListRepository : DataGenerator, IDataGenerator
         Console.ResetColor();
     }
 
-    public override void AddWheatBread()
+    public override void AddBread()
     {
-        _wheatBreadRepository.Read(); // reading from json file
+        _breadRepository.Read(); // reading from json file
 
-        if (_wheatBreadRepository.GetListCount() == 0)
+        if (_breadRepository.GetListCount() == 0)
         {
-            var wheatBread = GetWheatBread();
+            var bread = GetBread();
 
-            _wheatBreadRepository.AddBatch(wheatBread);
+            _breadRepository.AddBatch(bread);
         }
     }
 
-    public override void AddRyeBread()
+    public override void AddCustBread()
     {
-        _ryeBreadRepository.Read(); // reading from json file
+        _custBreadRepository.Read(); // reading from json file
 
-        if (_ryeBreadRepository.GetListCount() == 0)
+        if (_custBreadRepository.GetListCount() == 0)
         {
-            var ryeBread = GetRyeBread();
+            var custBread = GetCustBread();
 
-            _ryeBreadRepository.AddBatch(ryeBread);
+            _custBreadRepository.AddBatch(custBread);
         }
     }
 }
