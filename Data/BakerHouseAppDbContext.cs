@@ -6,7 +6,7 @@ using Microsoft.Extensions.Configuration;
 public class BakerHouseAppDbContext : DbContext
 {
     public DbSet<Bread> Breads => Set<Bread>();
-    public DbSet<CustBread> CustBreads => Set<CustBread>();
+    public DbSet<Customer> Customers => Set<Customer>();
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

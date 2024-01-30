@@ -4,7 +4,7 @@ public abstract class DataGenerator : IDataGenerator
 {
     public abstract void ViewDataSourceInfo();
     public abstract void AddBread();
-    public abstract void AddCustBread();
+    public abstract void AddCustomer();
 
     protected IEnumerable<Bread> GetBread()
     {
@@ -144,11 +144,11 @@ public abstract class DataGenerator : IDataGenerator
         };
                  return Bread;
     }
-    protected IEnumerable<CustBread> GetCustBread()
+    protected IEnumerable<Customer> GetCustBread()
     {
-        var CustBread = new List<CustBread>()
+        var Customer = new List<Customer>()
         {
-                new CustBread()
+                new Customer()
                 {
                         CustName = "SPP Toruńska",
                         AddressStreet = "torunska",
@@ -159,6 +159,6 @@ public abstract class DataGenerator : IDataGenerator
 
 
         };
-        return CustBread;
+        return Customer;
     }
 }

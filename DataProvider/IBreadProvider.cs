@@ -6,14 +6,14 @@ public interface IBreadProvider
     decimal GetMaximumPriceOfAllBread();
     decimal GetMinimumPriceOfAllBread();
     List<Bread> GetSpecificColumns();
-    List<CustBread> GetSpecificCustBreadColumns();
+    List<Customer> GetSpecificCustomerColumns();
     List<string> GetUniqueBreadType();
     string AnonymousClass();
 
     // ORDER BY
     List<Bread> OrderByNameAndCalories();
     List<Bread> OrderByName();
-    List<CustBread> OrderByCustName();
+    List<Customer> OrderByCustomerName();
     List<Bread> OrderByNameDescending();
     List<Bread> OrderByTypeAndName();
     List<Bread> OrderByTypeAndNameDesc();

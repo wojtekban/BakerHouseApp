@@ -1,7 +1,7 @@
 ﻿
 namespace BakerHouseApp.Data.Entities;
 
-public class CustBread: EntityBase
+public class Customer: EntityBase
 {
     public string CustName { get; set; }
     public string AddressStreet { get; set; }

@@ -7,7 +7,7 @@ services.AddSingleton<IEventHandlerService, EventHandlerService>();
 services.AddSingleton<IBreadProvider, BreadProvider>();
 services.AddSingleton<IQueryInfoProvider, QueryInfoProvider>();
 services.AddSingleton<IRepository<Bread>, ListRepository<Bread>>();                // ListRepository
-services.AddSingleton<IRepository<CustBread>, ListRepository<CustBread>>();        // ListRepository
+services.AddSingleton<IRepository<Customer>, ListRepository<Customer>>();        // ListRepository
 services.AddSingleton<IDataGenerator, DataGeneratorListRepository>();              // ListRepository
 
 

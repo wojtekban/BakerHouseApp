@@ -4,13 +4,13 @@ namespace BakerHouseApp.Services;
 public class UserCommunication : UserCommunicationBase, IUserCommunication
 {
     private readonly IRepository<Bread> _breadRepository;
-    private readonly IRepository<CustBread> _custBreadRepository;
+    private readonly IRepository<Customer> _customerRepository;
     private readonly IQueryInfoProvider _queryInfoProvider;
 
-    public UserCommunication(IRepository<Bread> breadRepository, IRepository<CustBread> custBreadRepository, IQueryInfoProvider queryInfoProvider)
+    public UserCommunication(IRepository<Bread> breadRepository, IRepository<Customer> customerRepository, IQueryInfoProvider queryInfoProvider)
     {
         _breadRepository = breadRepository;
-        _custBreadRepository = custBreadRepository;
+        _customerRepository = customerRepository;
         _queryInfoProvider = queryInfoProvider;
     }
 
@@ -42,7 +42,7 @@ public class UserCommunication : UserCommunicationBase, IUserCommunication
                     }
                     if (userChoiceToShowAll == "C")
                     {
-                        WriteAllToConsole(_custBreadRepository);
+                        WriteAllToConsole(_customerRepository);
                         break;
                     }
                     break;
@@ -56,7 +56,7 @@ public class UserCommunication : UserCommunicationBase, IUserCommunication
                     }
                     if (userChoiceToAdd == "C")
                     {
-                        AddNewCustBread(_custBreadRepository);
+                        AddNewCustomer(_customerRepository);
                         break;
                     }
                     break;
@@ -70,7 +70,7 @@ public class UserCommunication : UserCommunicationBase, IUserCommunication
                     }
                     if (userChoiceToFind == "C")
                     {
-                        FindEntityById(_custBreadRepository);
+                        FindEntityById(_customerRepository);
                         break;
                     }
                     break;
@@ -79,12 +79,12 @@ public class UserCommunication : UserCommunicationBase, IUserCommunication
                     var userChoiceToRemove = GetInputFromUser("B - Remove BREAD by id\nC - Remove CUST by id\nQ - leave and go to MENU").ToUpper();
                     if (userChoiceToRemove == "B")
                     {
-                        RemoveBreadCust(_breadRepository);
+                        RemoveBreadCustomer(_breadRepository);
                         break;
                     }
                     if (userChoiceToRemove == "C")
                     {
-                        RemoveBreadCust(_custBreadRepository);
+                        RemoveBreadCustomer(_customerRepository);
                         break;
                     }
                     break;
@@ -96,7 +96,7 @@ public class UserCommunication : UserCommunicationBase, IUserCommunication
                     break;
 
                 case "X": // Close app and Save changes
-                    CloseApp = CloseAppSaveChanges(_breadRepository, _custBreadRepository);
+                    CloseApp = CloseAppSaveChanges(_breadRepository, _customerRepository);
                     break;
 
                 default:
@@ -161,7 +161,7 @@ public class UserCommunication : UserCommunicationBase, IUserCommunication
 
     }
 
-    private void AddNewCustBread(IRepository<CustBread> custBreadRepository)
+    private void AddNewCustomer(IRepository<Customer> customerRepository)
     {
         var CustName = GetInputFromUser("Cust Name:");
         EmptyInputWarning(ref CustName, "Cust Name:");
@@ -177,14 +177,14 @@ public class UserCommunication : UserCommunicationBase, IUserCommunication
                 var choice = GetInputFromUser("Is this Cust?\nPress Y if YES\t\tPress N if NO").ToUpper();
                 if (choice == "Y")
                 {
-                    var newCustBread = new CustBread { CustName = CustName, AddressStreet = AddressStreet, AddressCityName = AddressCityName, AddressZipCode = AddressZipCode, NipNum = NipNum};
-                    custBreadRepository.Add(newCustBread);
+                    var newCustomer = new Customer { CustName = CustName, AddressStreet = AddressStreet, AddressCityName = AddressCityName, AddressZipCode = AddressZipCode, NipNum = NipNum};
+                    customerRepository.Add(newCustomer);
                     break;
                 }
                 if (choice == "N")
                 {
-                    var newCustBread = new CustBread { CustName = CustName, AddressStreet = AddressStreet, AddressCityName = AddressCityName, AddressZipCode = AddressZipCode, NipNum = NipNum };
-                    custBreadRepository.Add(newCustBread);
+                    var newCustomer = new Customer { CustName = CustName, AddressStreet = AddressStreet, AddressCityName = AddressCityName, AddressZipCode = AddressZipCode, NipNum = NipNum };
+                    customerRepository.Add(newCustomer);
                     break;
                 }
                 else
@@ -218,7 +218,7 @@ public class UserCommunication : UserCommunicationBase, IUserCommunication
         }
     }
 
-    private void RemoveBreadCust<T>(IRepository<T> breadCustRepository) where T : class, IEntity
+    private void RemoveBreadCustomer<T>(IRepository<T> breadCustRepository) where T : class, IEntity
     {
         var breadCustFound = FindEntityById(breadCustRepository);
         if (breadCustFound != null)
@@ -244,7 +244,7 @@ public class UserCommunication : UserCommunicationBase, IUserCommunication
         }
     }
 
-    private bool CloseAppSaveChanges(IRepository<Bread> breadRepository, IRepository<CustBread> custBreadRepository)
+    private bool CloseAppSaveChanges(IRepository<Bread> breadRepository, IRepository<Customer> customerRepository)
     {
         while (true)
         {
@@ -252,7 +252,7 @@ public class UserCommunication : UserCommunicationBase, IUserCommunication
             if (choice == "Y")
             {
                 breadRepository.Save();
-                custBreadRepository.Save();
+                customerRepository.Save();
                 WritelineColor("Changes successfully saved.", ConsoleColor.Green);
                 return true;
             }

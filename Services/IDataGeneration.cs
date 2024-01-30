@@ -3,5 +3,5 @@ public interface IDataGenerator
 {
     public void ViewDataSourceInfo();
     public void AddBread();
-    public void AddCustBread();
+    public void AddCustomer();
 }

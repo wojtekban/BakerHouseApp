@@ -17,7 +17,7 @@ public class App : IApp // main app
         {
             _dataGenerator.ViewDataSourceInfo();
             _dataGenerator.AddBread();
-            _dataGenerator.AddCustBread();
+            _dataGenerator.AddCustomer();
             _userCommunication.UserChoice();
     }
 }

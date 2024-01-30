@@ -5,12 +5,12 @@ namespace BakerHouseApp.DataProvider;
 public class BreadProvider : IBreadProvider
 {
     private readonly IRepository<Bread> _breadRepository;
-    private readonly IRepository<CustBread> _custBreadRepository;
+    private readonly IRepository<Customer> _customerRepository;
 
-    public BreadProvider(IRepository<Bread> breadRepository, IRepository<CustBread> custBreadRepository)
+    public BreadProvider(IRepository<Bread> breadRepository, IRepository<Customer> customerRepository)
     {
         _breadRepository = breadRepository;
-        _custBreadRepository = custBreadRepository;
+        _customerRepository = customerRepository;
     }
 
     // SELECT
@@ -38,10 +38,10 @@ public class BreadProvider : IBreadProvider
 
         return list;
     }
-    public List<CustBread> GetSpecificCustBreadColumns()
+    public List<Customer> GetSpecificCustomerColumns()
     {
-        var custBreads = _custBreadRepository.GetAll();
-        var list = custBreads.Select(x => new CustBread
+        var custBreads = _customerRepository.GetAll();
+        var list = custBreads.Select(x => new Customer
         {
             Id = x.Id,
             CustName = x.CustName,
@@ -103,9 +103,9 @@ public class BreadProvider : IBreadProvider
         var breads = _breadRepository.GetAll();
         return breads.OrderBy(x => x.Name).ToList();
     }
-    public List<CustBread> OrderByCustName()
+    public List<Customer> OrderByCustomerName()
     {
-        var custBreads = _custBreadRepository.GetAll();
+        var custBreads = _customerRepository.GetAll();
         return custBreads.OrderBy(x => x.CustName).ToList();
     }
     public List<Bread> OrderByNameDescending()

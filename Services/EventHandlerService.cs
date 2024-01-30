@@ -3,19 +3,19 @@
 public class EventHandlerService : IEventHandlerService
 {
     private readonly IRepository<Bread> _breadRepository;
-    private readonly IRepository<CustBread> _custBreadRepository;
-    public EventHandlerService(IRepository<Bread> breadRepository, IRepository<CustBread> custBreadRepository)
+    private readonly IRepository<Customer> _customerRepository;
+    public EventHandlerService(IRepository<Bread> breadRepository, IRepository<Customer> customerRepository)
     {
         _breadRepository = breadRepository;
-        _custBreadRepository = custBreadRepository;
+        _customerRepository = customerRepository;
     }
 
     public void SubscribeToEvents()
     {
         _breadRepository.ItemAdded += BreadRepositoryOnItemAdded;
         _breadRepository.ItemRemoved += BreadRepositoryOnItemRemoved;
-        _custBreadRepository.ItemAdded += CustBreadRepositoryOnItemAdded;
-        _custBreadRepository.ItemRemoved += CustBreadRepositoryOnItemRemoved;
+        _customerRepository.ItemAdded += CustomerRepositoryOnItemAdded;
+        _customerRepository.ItemRemoved += CustomerRepositoryOnItemRemoved;
     }
 
     private void BreadRepositoryOnItemAdded(object? sender, Bread e)
@@ -34,17 +34,17 @@ public class EventHandlerService : IEventHandlerService
         Console.ResetColor();
     }
 
-    private void CustBreadRepositoryOnItemAdded(object? sender, CustBread e)
+    private void CustomerRepositoryOnItemAdded(object? sender, Customer e)
     {
-        AddAuditInfo(e, "CUST BREAD ADDED");
+        AddAuditInfo(e, "CUSTOMER ADDED");
         Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine($"Cust Bread\n{e}\nadded successfully.\n");
         Console.ResetColor();
     }
 
-    private void CustBreadRepositoryOnItemRemoved(object? sender, CustBread e)
+    private void CustomerRepositoryOnItemRemoved(object? sender, Customer e)
     {
-        AddAuditInfo(e, "CUST BREAD REMOVED");
+        AddAuditInfo(e, "CUSTOMER REMOVED");
         Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine($"Cust Bread\n{e}\nremoved successfully.\n");
         Console.ResetColor();

@@ -54,7 +54,7 @@ public class QueryInfoProvider : UserCommunicationBase, IQueryInfoProvider
                     break;
 
                 case "6": // Order By Cust <Name>
-                    OrderByCustName();
+                    OrderByCustomerName();
                     break;
 
                 case "X":
@@ -68,13 +68,13 @@ public class QueryInfoProvider : UserCommunicationBase, IQueryInfoProvider
         }
     }
 
-    private void OrderByCustName()
+    private void OrderByCustomerName()
     {
         WritelineColor("Order Cust by <Name>", ConsoleColor.DarkCyan);
-        var orderByCustName = _breadProvider.OrderByCustName();
-        foreach (var custBreads in orderByCustName)
+        var orderByCustName = _breadProvider.OrderByCustomerName();
+        foreach (var customers in orderByCustName)
         {
-            Console.WriteLine(custBreads);
+            Console.WriteLine(customers);
         }
     }
     private void OrderByTypeAndName()

@@ -3,11 +3,11 @@
 public class DataGeneratorListRepository : DataGenerator
 {
     private readonly IRepository<Bread> _breadRepository;
-    private readonly IRepository<CustBread> _custBreadRepository;
-    public DataGeneratorListRepository(IRepository<Bread> breadRepository, IRepository<CustBread> custBreadRepository)
+    private readonly IRepository<Customer> _customerRepository;
+    public DataGeneratorListRepository(IRepository<Bread> breadRepository, IRepository<Customer> customerRepository)
     {
         _breadRepository = breadRepository;
-        _custBreadRepository = custBreadRepository;
+        _customerRepository = customerRepository;
     }
 
     public override void ViewDataSourceInfo()
@@ -30,15 +30,15 @@ public class DataGeneratorListRepository : DataGenerator
         }
     }
 
-    public override void AddCustBread()
+    public override void AddCustomer()
     {
-        _custBreadRepository.Read(); // reading from json file
+        _customerRepository.Read(); // reading from json file
 
-        if (_custBreadRepository.GetListCount() == 0)
+        if (_customerRepository.GetListCount() == 0)
         {
-            var custBread = GetCustBread();
+            var customer = GetCustBread();
 
-            _custBreadRepository.AddBatch(custBread);
+            _customerRepository.AddBatch(customer);
         }
     }
 }
