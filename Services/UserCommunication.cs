@@ -22,10 +22,10 @@ public class UserCommunication : UserCommunicationBase, IUserCommunication
         {
             Console.WriteLine();
             WritelineColor("--- MAIN MENU ---\n" +
-                "1 - View all Bread or Cust\n" +
-                "2 - Add new Bread or Cust\n" +
-                "3 - Find Bread or Cust by id\n" +
-                "4 - Remove Bread or Cust from File\n" +
+                "1 - View all Bread or Customer\n" +
+                "2 - Add new Bread or Customer\n" +
+                "3 - Find Bread or Customer by id\n" +
+                "4 - Remove Bread or Customer from File\n" +
                 "5 - Get query information...\n" +
                 "X - Close the app and save changes\n", ConsoleColor.Cyan);
 
@@ -34,7 +34,7 @@ public class UserCommunication : UserCommunicationBase, IUserCommunication
             switch (userInput)
             {
                 case "1": // View all
-                    var userChoiceToShowAll = GetInputFromUser("B - View all BREAD\nC - View all CUST\nAny Other key - leave and go to MENU").ToUpper();
+                    var userChoiceToShowAll = GetInputFromUser("B - View all BREAD\nC - View all CUSTOMER\nAny Other key - leave and go to MENU").ToUpper();
                     if (userChoiceToShowAll == "B")
                     {
                         WriteAllToConsole(_breadRepository);
@@ -48,7 +48,7 @@ public class UserCommunication : UserCommunicationBase, IUserCommunication
                     break;
 
                 case "2": // Add new
-                    var userChoiceToAdd = GetInputFromUser("B - Add new BREAD\nC - Add new CUST\nQ - leave and go to MENU").ToUpper();
+                    var userChoiceToAdd = GetInputFromUser("B - Add new BREAD\nC - Add new CUSTOMER\nQ - leave and go to MENU").ToUpper();
                     if (userChoiceToAdd == "B")
                     {
                         AddNewBread(_breadRepository);
@@ -62,7 +62,7 @@ public class UserCommunication : UserCommunicationBase, IUserCommunication
                     break;
 
                 case "3": // Find by id
-                    var userChoiceToFind = GetInputFromUser("B - Find BREAD by id\nC - Find CUST by id\nQ - leave and go to MENU").ToUpper();
+                    var userChoiceToFind = GetInputFromUser("B - Find BREAD by id\nC - Find CUSTOMER by id\nQ - leave and go to MENU").ToUpper();
                     if (userChoiceToFind == "B")
                     {
                         FindEntityById(_breadRepository);
@@ -76,7 +76,7 @@ public class UserCommunication : UserCommunicationBase, IUserCommunication
                     break;
 
                 case "4": // Remove by id
-                    var userChoiceToRemove = GetInputFromUser("B - Remove BREAD by id\nC - Remove CUST by id\nQ - leave and go to MENU").ToUpper();
+                    var userChoiceToRemove = GetInputFromUser("B - Remove BREAD by id\nC - Remove CUSTOMER by id\nQ - leave and go to MENU").ToUpper();
                     if (userChoiceToRemove == "B")
                     {
                         RemoveBreadCustomer(_breadRepository);
@@ -163,8 +163,8 @@ public class UserCommunication : UserCommunicationBase, IUserCommunication
 
     private void AddNewCustomer(IRepository<Customer> customerRepository)
     {
-        var CustName = GetInputFromUser("Cust Name:");
-        EmptyInputWarning(ref CustName, "Cust Name:");
+        var CustName = GetInputFromUser("Customer Name:");
+        EmptyInputWarning(ref CustName, "Customer Name:");
         var AddressStreet = GetInputFromUser("Address Street:");
         EmptyInputWarning(ref AddressStreet, "Address Street:");
         var AddressCityName = GetInputFromUser("Address City Name:");
@@ -174,7 +174,7 @@ public class UserCommunication : UserCommunicationBase, IUserCommunication
         while (true)
         {
             {
-                var choice = GetInputFromUser("Is this Cust?\nPress Y if YES\t\tPress N if NO").ToUpper();
+                var choice = GetInputFromUser("Is this Customer?\nPress Y if YES\t\tPress N if NO").ToUpper();
                 if (choice == "Y")
                 {
                     var newCustomer = new Customer { CustName = CustName, AddressStreet = AddressStreet, AddressCityName = AddressCityName, AddressZipCode = AddressZipCode, NipNum = NipNum};

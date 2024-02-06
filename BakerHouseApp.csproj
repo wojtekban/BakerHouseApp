@@ -14,16 +14,25 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DataBase\" />
-    <Folder Include="DataProvider\Extension\" />
+    <Folder Include="Components\DataProvider\Extension\" />
+    <Folder Include="Resources\Files\" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="DataBase\Bread_save.json">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    <None Update="Resources\Files\asortyment.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="DataBase\CustBread_save.json">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    <None Update="Resources\Files\customer.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Files\fuel.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Files\manufacturers.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Files\stany.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 

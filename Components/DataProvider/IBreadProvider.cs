@@ -1,4 +1,4 @@
-﻿namespace BakerHouseApp.DataProvider;
+﻿namespace BakerHouseApp.Components.DataProvider;
 
 public interface IBreadProvider
 {
@@ -17,7 +17,7 @@ public interface IBreadProvider
     List<Bread> OrderByNameDescending();
     List<Bread> OrderByTypeAndName();
     List<Bread> OrderByTypeAndNameDesc();
- 
+
     // WHERE
     List<Bread> WhereStartsWith(string prefix);
     List<Bread> WhereStartsWithAndPriceIsGreaterThan(string prefix, decimal price);
@@ -38,12 +38,12 @@ public interface IBreadProvider
     List<Bread> TakeBreadWhileExpirationDate(DateTime date);
     List<Bread> TakeBreadWhileNameStartsWith(string prefix);
 
-     // SKIP
+    // SKIP
     List<Bread> SkipBread(int howMany);
     List<Bread> SkipPlayersWhileExpirationDate(DateTime date);
     List<Bread> SkipBreadWhileNameStartsWith(string prefix);
- 
-     // DISTINCT
+
+    // DISTINCT
     List<double> DistinctAllCalories();
     List<Bread> DistinctByCalories();
     List<string> DistinctAllType();

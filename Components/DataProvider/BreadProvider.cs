@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 
-namespace BakerHouseApp.DataProvider;
+namespace BakerHouseApp.Components.DataProvider;
 
 public class BreadProvider : IBreadProvider
 {
@@ -63,9 +63,9 @@ public class BreadProvider : IBreadProvider
         var breads = _breadRepository.GetAll();
         var list = breads.Select(x => new
         {
-            Name = x.Name,
-            Weight = x.Weight,
-            Price = x.Price
+            x.Name,
+            x.Weight,
+            x.Price
         }).ToList();
 
         StringBuilder sb = new StringBuilder();
@@ -187,51 +187,51 @@ public class BreadProvider : IBreadProvider
     public List<Bread> TakeBread(int howMany)
     {
         var breads = _breadRepository.GetAll();
-                return breads
-                .OrderByDescending(x => x.DateOfProduction)
-                .Take(howMany)
-                .ToList();
+        return breads
+        .OrderByDescending(x => x.DateOfProduction)
+        .Take(howMany)
+        .ToList();
     }
     public List<Bread> TakeBread(Range range)
     {
         var breads = _breadRepository.GetAll();
-                 return breads
-                 .OrderBy(x => x.Name)
-                 .ThenBy(x => x.Type)
-                 .Take(range)
-                 .ToList();
+        return breads
+        .OrderBy(x => x.Name)
+        .ThenBy(x => x.Type)
+        .Take(range)
+        .ToList();
     }
     public List<Bread> TakeBreadWhileExpirationDate(DateTime date)
     {
         var breads = _breadRepository.GetAll();
-                 return breads
-                 .OrderByDescending(x => x.ExpirationDate)
-                 .TakeWhile(x => x.ExpirationDate >= date)
-                 .ToList();
+        return breads
+        .OrderByDescending(x => x.ExpirationDate)
+        .TakeWhile(x => x.ExpirationDate >= date)
+        .ToList();
     }
     public List<Bread> TakeBreadWhileNameStartsWith(string prefix)
     {
         var breads = _breadRepository.GetAll();
-              return breads
-             .OrderBy(x => x.Name)
-             .TakeWhile(x => x.Name!.StartsWith(prefix))
-             .ToList();
+        return breads
+       .OrderBy(x => x.Name)
+       .TakeWhile(x => x.Name!.StartsWith(prefix))
+       .ToList();
     }
 
     // SKIP
     public List<Bread> SkipBread(int howMany)
     {
         var breads = _breadRepository.GetAll();
-              return breads
-             .Skip(howMany)
-             .ToList();
+        return breads
+       .Skip(howMany)
+       .ToList();
     }
     public List<Bread> SkipPlayersWhileExpirationDate(DateTime date)
     {
         var breads = _breadRepository.GetAll();
-                 return breads.OrderByDescending(x => x.ExpirationDate)
-                .SkipWhile(x => x.ExpirationDate >= date)
-                .ToList();
+        return breads.OrderByDescending(x => x.ExpirationDate)
+       .SkipWhile(x => x.ExpirationDate >= date)
+       .ToList();
     }
     public List<Bread> SkipBreadWhileNameStartsWith(string prefix)
     {
@@ -242,24 +242,24 @@ public class BreadProvider : IBreadProvider
             .SkipWhile(x => x.Name!.StartsWith(prefix))
             .ToList();
     }
-   
+
     // DISTINCT
     public List<string> DistinctAllType()
     {
         var breads = _breadRepository.GetAll();
-              return breads
-             .Select(x => x.Type!)
-             .Distinct()
-             .OrderBy(x => x)
-             .ToList();
+        return breads
+       .Select(x => x.Type!)
+       .Distinct()
+       .OrderBy(x => x)
+       .ToList();
     }
     public List<Bread> DistinctByType()
     {
         var breads = _breadRepository.GetAll();
-                  return breads
-                 .DistinctBy(x => x.Type)
-                 .OrderBy(x => x.Type)
-                 .ToList();
+        return breads
+       .DistinctBy(x => x.Type)
+       .OrderBy(x => x.Type)
+       .ToList();
     }
     public List<double> DistinctAllCalories()
     {
@@ -285,5 +285,5 @@ public class BreadProvider : IBreadProvider
         var breads = _breadRepository.GetAll();
         return breads.Chunk(size).ToList();
     }
-  
+
 }
