@@ -51,12 +51,12 @@ public class UserCommunication : UserCommunicationBase, IUserCommunication
                     var userChoiceToAdd = GetInputFromUser("B - Add new BREAD\nC - Add new CUSTOMER\nQ - leave and go to MENU").ToUpper();
                     if (userChoiceToAdd == "B")
                     {
-                        AddNewBread(_breadRepository);
+                        AddNewBread();
                         break;
                     }
                     if (userChoiceToAdd == "C")
                     {
-                        AddNewCustomer(_customerRepository);
+                        AddNewCustomer();
                         break;
                     }
                     break;
@@ -96,7 +96,7 @@ public class UserCommunication : UserCommunicationBase, IUserCommunication
                     break;
 
                 case "X": // Close app and Save changes
-                    CloseApp = CloseAppSaveChanges(_breadRepository, _customerRepository);
+                    CloseApp = CloseAppSaveChanges();
                     break;
 
                 default:
@@ -122,7 +122,7 @@ public class UserCommunication : UserCommunicationBase, IUserCommunication
         }
     }
 
-    private void AddNewBread(IRepository<Bread> breadRepository)
+    private void AddNewBread()
     {
         var Name = GetInputFromUser("Name:");
         EmptyInputWarning(ref Name, "Name:");
@@ -144,13 +144,13 @@ public class UserCommunication : UserCommunicationBase, IUserCommunication
                     if (choice == "Y")
                     {
                         var newBread = new Bread { Name = Name, Quantity = Quantity, Weight = Weight, Date = Date, ExpirationDate = ExpirationDate, DateOfProduction= DateOfProduction, Calories = Calories, StandardCost = StandardCost, Price = Price, Type = Type };
-                        breadRepository.Add(newBread);
+                        _breadRepository.Add(newBread);
                         break;
                     }
                     if (choice == "N")
                     {
                     var newBread = new Bread { Name = Name, Quantity = Quantity, Weight = Weight, Date = Date, ExpirationDate = ExpirationDate, DateOfProduction = DateOfProduction, Calories = Calories, StandardCost = StandardCost, Price = Price, Type = Type };
-                    breadRepository.Add(newBread);
+                    _breadRepository.Add(newBread);
                     break;
                     }
                     else
@@ -161,7 +161,7 @@ public class UserCommunication : UserCommunicationBase, IUserCommunication
 
     }
 
-    private void AddNewCustomer(IRepository<Customer> customerRepository)
+    private void AddNewCustomer()
     {
         var CustName = GetInputFromUser("Customer Name:");
         EmptyInputWarning(ref CustName, "Customer Name:");
@@ -178,13 +178,13 @@ public class UserCommunication : UserCommunicationBase, IUserCommunication
                 if (choice == "Y")
                 {
                     var newCustomer = new Customer { CustName = CustName, AddressStreet = AddressStreet, AddressCityName = AddressCityName, AddressZipCode = AddressZipCode, NipNum = NipNum};
-                    customerRepository.Add(newCustomer);
+                    _customerRepository.Add(newCustomer);
                     break;
                 }
                 if (choice == "N")
                 {
                     var newCustomer = new Customer { CustName = CustName, AddressStreet = AddressStreet, AddressCityName = AddressCityName, AddressZipCode = AddressZipCode, NipNum = NipNum };
-                    customerRepository.Add(newCustomer);
+                    _customerRepository.Add(newCustomer);
                     break;
                 }
                 else
@@ -244,15 +244,15 @@ public class UserCommunication : UserCommunicationBase, IUserCommunication
         }
     }
 
-    private bool CloseAppSaveChanges(IRepository<Bread> breadRepository, IRepository<Customer> customerRepository)
+    private bool CloseAppSaveChanges()
     {
         while (true)
         {
             var choice = GetInputFromUser("Do you want to save changes?\nPress Y if YES\t\tPress N if NO").ToUpper();
             if (choice == "Y")
             {
-                breadRepository.Save();
-                customerRepository.Save();
+                _breadRepository.Save();
+                _customerRepository.Save();
                 WritelineColor("Changes successfully saved.", ConsoleColor.Green);
                 return true;
             }

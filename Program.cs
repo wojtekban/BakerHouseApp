@@ -1,9 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
 var services = new ServiceCollection();
-//services.AddSingleton<IApp, App>();
-services.AddSingleton<IApp, AppCsv>();
-services.AddSingleton<IApp, AppXml>();
+services.AddSingleton<IApp, App>();
+//services.AddSingleton<IApp, AppCsv>();
+//services.AddSingleton<IApp, AppXml>();
 services.AddSingleton<IXmlCreator, XmlCreator>();
 services.AddSingleton<IUserCommunication, UserCommunication>();
 services.AddSingleton<IEventHandlerService, EventHandlerService>();
