@@ -1,6 +1,6 @@
 ﻿namespace BakerHouseApp.Services;
 
-public abstract class DataGenerator : IDataGenerator
+public abstract class DataGeneration : IDataGeneration
 {
     public abstract void ViewDataSourceInfo();
     public abstract void AddBread();
@@ -144,7 +144,7 @@ public abstract class DataGenerator : IDataGenerator
         };
                  return Bread;
     }
-    protected IEnumerable<Customer> GetCustBread()
+    protected IEnumerable<Customer> GetCustomer()
     {
         var Customer = new List<Customer>()
         {

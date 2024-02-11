@@ -1,6 +1,6 @@
 ﻿namespace BakerHouseApp.Services;
 
-public class DataGeneratorListRepository : DataGenerator
+public class DataGeneratorListRepository : DataGeneration
 {
     private readonly IRepository<Bread> _breadRepository;
     private readonly IRepository<Customer> _customerRepository;
@@ -36,7 +36,7 @@ public class DataGeneratorListRepository : DataGenerator
 
         if (_customerRepository.GetListCount() == 0)
         {
-            var customer = GetCustBread();
+            var customer = GetCustomer();
 
             _customerRepository.AddBatch(customer);
         }

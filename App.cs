@@ -3,21 +3,25 @@
 public class App : IApp // main app
 {
 
-        private readonly IDataGenerator _dataGenerator;
+        private readonly IDataGeneration _dataGeneration;
         private readonly IUserCommunication _userCommunication;
         private readonly IEventHandlerService _eventHandlerService;
+        private readonly BakerHouseAppDbContext _bakerHauseAppDbContext;
 
-        public App(IDataGenerator dataGenerator, IUserCommunication userCommunication, IEventHandlerService eventHandlerService)
+        public App(IDataGeneration dataGeneration, IUserCommunication userCommunication, IEventHandlerService eventHandlerService, BakerHouseAppDbContext bakerHauseAppDbContext)
         {
-            _dataGenerator = dataGenerator;
+            _dataGeneration = dataGeneration;
             _userCommunication = userCommunication;
             _eventHandlerService = eventHandlerService;
-        }
+            _bakerHauseAppDbContext = bakerHauseAppDbContext;
+            _bakerHauseAppDbContext.Database.EnsureCreated();
+
+    }
         public void Run()
         {
-            _dataGenerator.ViewDataSourceInfo();
-            _dataGenerator.AddBread();
-            _dataGenerator.AddCustomer();
+            _dataGeneration.ViewDataSourceInfo();
+            _dataGeneration.AddBread();
+            _dataGeneration.AddCustomer();
             _userCommunication.UserChoice();
     }
 }

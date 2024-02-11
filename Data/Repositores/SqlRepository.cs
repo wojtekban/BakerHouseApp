@@ -5,14 +5,14 @@ namespace BakerHouseApp.Data.Repositores;
 public class SqlRepository<T> : IRepository<T> where T : class, IEntity, new()
 {
     private readonly DbSet<T> _dbSet;
-    private readonly DbContext _dbContext;
+    private readonly BakerHouseAppDbContext _dbContext;
 
 
     public event EventHandler<T>? ItemAdded;
     public event EventHandler<T>? ItemRemoved;
-    public SqlRepository(DbContext dbcontext)
+    public SqlRepository(BakerHouseAppDbContext dbContext)
     {
-        _dbContext = dbcontext;
+        _dbContext = dbContext;
         _dbSet = _dbContext.Set<T>();
     }
 

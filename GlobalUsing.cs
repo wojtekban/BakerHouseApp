@@ -3,7 +3,7 @@ global using BakerHouseApp;
 global using System.Text;
 global using Microsoft.EntityFrameworkCore;
 global using BakerHouseApp.Data.Entities;
-global using BakerHouseApp.Data.Entities.Extensions;
+global using BakerHouseApp.Data;
 global using BakerHouseApp.Data.Repositores;
 global using BakerHouseApp.Data.Repositores.Extensions;
 global using BakerHouseApp.Components.DataProvider;

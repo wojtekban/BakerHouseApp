@@ -1,6 +1,6 @@
 ﻿namespace BakerHouseApp.Components.CsvReader;
 
-internal class CsvReader : ICsvReader
+public class CsvReader : ICsvReader
 {
     public List<Assortment> ProcessAssortments(string filePath)
     {

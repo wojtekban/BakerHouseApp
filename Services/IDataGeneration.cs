@@ -1,5 +1,5 @@
 ﻿namespace BakerHouseApp.Services;
-public interface IDataGenerator
+public interface IDataGeneration
 {
     public void ViewDataSourceInfo();
     public void AddBread();
