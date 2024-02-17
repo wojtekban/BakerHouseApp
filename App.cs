@@ -1,6 +1,6 @@
 ﻿namespace BakerHouseApp;
 
-public class App : IApp // main app
+public class App : IApp
 {
 
         private readonly IDataGeneration _dataGeneration;
@@ -19,6 +19,7 @@ public class App : IApp // main app
     }
         public void Run()
         {
+            _eventHandlerService.SubscribeToEvents();
             _dataGeneration.ViewDataSourceInfo();
             _dataGeneration.AddBread();
             _dataGeneration.AddCustomer();

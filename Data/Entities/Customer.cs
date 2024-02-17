@@ -21,7 +21,4 @@ public class Customer: EntityBase
       
         return sb.ToString();
     }
-
-
-    //public override string ToString() => $"Id: {Id}, CustName: {CustName}, AddressStreet: {AddressStreet}, AddressCityName: {AddressCityName}, AddressZipCode: {AddressZipCode}, NipNum: {NipNum}";
 }

@@ -1,5 +1,4 @@
-﻿
-namespace BakerHouseApp.Services;
+﻿namespace BakerHouseApp.Services;
 
 public class UserCommunication : UserCommunicationBase, IUserCommunication
 {

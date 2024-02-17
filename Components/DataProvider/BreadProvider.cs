@@ -1,6 +1,4 @@
-﻿using System.Numerics;
-
-namespace BakerHouseApp.Components.DataProvider;
+﻿namespace BakerHouseApp.Components.DataProvider;
 
 public class BreadProvider : IBreadProvider
 {
@@ -19,11 +17,13 @@ public class BreadProvider : IBreadProvider
         var breads = _breadRepository.GetAll();
         return breads.Select(x => x.Price).Max();
     }
+
     public decimal GetMinimumPriceOfAllBread()
     {
         var breads = _breadRepository.GetAll();
         return breads.Select(x => x.Price).Min();
     }
+
     public List<Bread> GetSpecificColumns()
     {
         var breads = _breadRepository.GetAll();
@@ -38,6 +38,7 @@ public class BreadProvider : IBreadProvider
 
         return list;
     }
+
     public List<Customer> GetSpecificCustomerColumns()
     {
         var custBreads = _customerRepository.GetAll();
@@ -53,11 +54,13 @@ public class BreadProvider : IBreadProvider
 
         return list;
     }
+
     public List<string> GetUniqueBreadType()
     {
         var breads = _breadRepository.GetAll();
         return breads.Select(x => x.Type).Distinct().ToList()!;
     }
+
     public string AnonymousClass()
     {
         var breads = _breadRepository.GetAll();
@@ -86,28 +89,33 @@ public class BreadProvider : IBreadProvider
         return breads.OrderBy(x => x.Name)
             .ThenBy(x => x.Calories).ToList();
     }
+
     public List<Bread> OrderByTypeAndName()
     {
         var breads = _breadRepository.GetAll();
         return breads.OrderBy(x => x.Type)
             .ThenBy(x => x.Name).ToList();
     }
+
     public List<Bread> OrderByTypeAndNameDesc()
     {
         var breads = _breadRepository.GetAll();
         return breads.OrderByDescending(x => x.Type)
             .ThenBy(x => x.Name).ToList();
     }
+
     public List<Bread> OrderByName()
     {
         var breads = _breadRepository.GetAll();
         return breads.OrderBy(x => x.Name).ToList();
     }
+
     public List<Customer> OrderByCustomerName()
     {
         var custBreads = _customerRepository.GetAll();
         return custBreads.OrderBy(x => x.CustName).ToList();
     }
+
     public List<Bread> OrderByNameDescending()
     {
         var breads = _breadRepository.GetAll();
@@ -120,16 +128,19 @@ public class BreadProvider : IBreadProvider
         var breads = _breadRepository.GetAll();
         return breads.Where(x => x.Name!.StartsWith(prefix)).ToList();
     }
+
     public List<Bread> WhereStartsWithAndPriceIsGreaterThan(string prefix, decimal cost)
     {
         var breads = _breadRepository.GetAll();
         return breads.Where(x => x.Name!.StartsWith(prefix) && x.Price > cost).ToList();
     }
+
     public List<Bread> WhereTypeIs(string type)
     {
         var breads = _breadRepository.GetAll();
         return breads.Where(x => x.Type == "Gold").ToList();
     }
+
     public List<Bread> WhereStartsWithAndCostIsGreaterThan(string prefix, decimal cost)
     {
         var breads = _breadRepository.GetAll();
@@ -153,11 +164,13 @@ public class BreadProvider : IBreadProvider
         }
         return Bread!;
     }
+
     public Bread FirstByType(string type)
     {
         var breads = _breadRepository.GetAll();
         return breads.First(x => x.Type == type);
     }
+
     public Bread? FirstOrDefaultByType(string type)
     {
         var breads = _breadRepository.GetAll();
@@ -169,6 +182,7 @@ public class BreadProvider : IBreadProvider
 
         return Bread!;
     }
+
     public Bread FirstOrDefaultByTypeWithDefault(string type)
     {
         var breads = _breadRepository.GetAll();
@@ -177,6 +191,7 @@ public class BreadProvider : IBreadProvider
                x => x.Type == type,
                new Bread { Id = -1, Name = "NOT FOUND" });
     }
+
     public Bread LastByType(string type)
     {
         var breads = _breadRepository.GetAll();
@@ -192,6 +207,7 @@ public class BreadProvider : IBreadProvider
         .Take(howMany)
         .ToList();
     }
+
     public List<Bread> TakeBread(Range range)
     {
         var breads = _breadRepository.GetAll();
@@ -201,6 +217,7 @@ public class BreadProvider : IBreadProvider
         .Take(range)
         .ToList();
     }
+
     public List<Bread> TakeBreadWhileExpirationDate(DateTime date)
     {
         var breads = _breadRepository.GetAll();
@@ -209,6 +226,7 @@ public class BreadProvider : IBreadProvider
         .TakeWhile(x => x.ExpirationDate >= date)
         .ToList();
     }
+
     public List<Bread> TakeBreadWhileNameStartsWith(string prefix)
     {
         var breads = _breadRepository.GetAll();
@@ -226,6 +244,7 @@ public class BreadProvider : IBreadProvider
        .Skip(howMany)
        .ToList();
     }
+
     public List<Bread> SkipPlayersWhileExpirationDate(DateTime date)
     {
         var breads = _breadRepository.GetAll();
@@ -233,6 +252,7 @@ public class BreadProvider : IBreadProvider
        .SkipWhile(x => x.ExpirationDate >= date)
        .ToList();
     }
+
     public List<Bread> SkipBreadWhileNameStartsWith(string prefix)
     {
         var breads = _breadRepository.GetAll();
@@ -253,6 +273,7 @@ public class BreadProvider : IBreadProvider
        .OrderBy(x => x)
        .ToList();
     }
+
     public List<Bread> DistinctByType()
     {
         var breads = _breadRepository.GetAll();
@@ -261,6 +282,7 @@ public class BreadProvider : IBreadProvider
        .OrderBy(x => x.Type)
        .ToList();
     }
+
     public List<double> DistinctAllCalories()
     {
         var breads = _breadRepository.GetAll();

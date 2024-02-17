@@ -1,6 +1,4 @@
-﻿using System.Text.Json;
-
-namespace BakerHouseApp.Data.Entities.Extensions;
+﻿namespace BakerHouseApp.Data.Entities.Extensions;
 
 public static class EntityExtensions
 {

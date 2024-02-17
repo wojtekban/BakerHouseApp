@@ -5,7 +5,6 @@ namespace BakerHouseApp.Data.Repositores;
 public class ListRepository<T> : IRepository<T> where T : class, IEntity, new()
 {
     private readonly List<T> _items = new();
- // private readonly string path = $"{typeof(T).Name}_save.json";
     private readonly string path = $@"C:\Users\Wojtek\source\repos\wojtekban\BakerHouseApp\Resources\Files\{typeof(T).Name}_save.json";
     private int lastUsedId = 1;
 
@@ -58,6 +57,7 @@ public class ListRepository<T> : IRepository<T> where T : class, IEntity, new()
         var objectsSerialized = JsonSerializer.Serialize<IEnumerable<T>>(_items);
         File.WriteAllText(path, objectsSerialized);
     }
+
     public IEnumerable<T> Read()
     {
         if (File.Exists(path))

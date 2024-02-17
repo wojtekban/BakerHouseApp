@@ -1,6 +1,4 @@
-﻿using BakerHouseApp.Data.Entities;
-
-namespace BakerHouseApp.Data.Repositores;
+﻿namespace BakerHouseApp.Data.Repositores;
 
 public class SqlRepository<T> : IRepository<T> where T : class, IEntity, new()
 {

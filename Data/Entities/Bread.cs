@@ -27,7 +27,3 @@ public class Bread : EntityBase
         return sb.ToString();
     }
 }
-
-//ToShortDateString()
-// public override string ToString() => $"Id: {Id}, Data zmian: {Data}, Nazwa pieczywa: {Name}, Ilość pieczywa: {Quantity},  Waga pieczywa: {Weight}g ";
-

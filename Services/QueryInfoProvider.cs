@@ -1,8 +1,4 @@
-﻿
-using System.Xml.Linq;
-using BakerHouseApp.Components.DataProvider;
-
-namespace BakerHouseApp.Services;
+﻿namespace BakerHouseApp.Services;
 
 public class QueryInfoProvider : UserCommunicationBase, IQueryInfoProvider
 {

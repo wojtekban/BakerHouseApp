@@ -49,6 +49,7 @@ public class EventHandlerService : IEventHandlerService
         Console.WriteLine($"Cust Bread\n{e}\nremoved successfully.\n");
         Console.ResetColor();
     }
+
     private void AddAuditInfo<T>(T e, string info) where T : class, IEntity
     {
         using (var writer = File.AppendText((IRepository<IEntity>.auditFileName)))
