@@ -15,24 +15,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Components\DataProvider\Extension\" />
-    <Folder Include="Resources\Files\" />
+    <Folder Include="ApplicationServices\Components\DataProvider\Extension\" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Resources\Files\asortyment.csv">
+    <None Update="DataAccess\Resources\Files\asortyment.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Resources\Files\customer.csv">
+    <None Update="DataAccess\Resources\Files\customer.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Resources\Files\fuel.csv">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Resources\Files\manufacturers.csv">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Resources\Files\stany.csv">
+    <None Update="DataAccess\Resources\Files\stany.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
