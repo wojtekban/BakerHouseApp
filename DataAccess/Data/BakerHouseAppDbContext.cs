@@ -14,7 +14,6 @@ public class BakerHouseAppDbContext : DbContext
         IConfiguration configuration = configurationBuilder.Build();
         optionsBuilder.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
     }
-
 }
 
 
