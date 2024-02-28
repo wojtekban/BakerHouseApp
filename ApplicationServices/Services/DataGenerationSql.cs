@@ -2,11 +2,12 @@
 
 public class DataGenerationSql : DataGeneration
 {
-    private readonly BakerHouseAppDbContext _dbContext;
-
-    public DataGenerationSql(BakerHouseAppDbContext dbContext)
+    private readonly IRepository<Bread> _breadRepository;
+    private readonly IRepository<Customer> _customerRepository;
+    public DataGenerationSql(IRepository<Bread> breadRepository, IRepository<Customer> customerRepository)
     {
-        _dbContext = dbContext;
+        _breadRepository = breadRepository;
+        _customerRepository = customerRepository;
     }
 
     public override void ViewDataSourceInfo()
@@ -18,22 +19,22 @@ public class DataGenerationSql : DataGeneration
     }
 
     public override void AddBread()
-    {
-        if (_dbContext.Database.CanConnect() && !_dbContext.Breads.Any())
+    {        
+        if (_breadRepository == null)
         {
             var breads = GetBread();
-            _dbContext.Breads.AddRange(breads);
-            _dbContext.SaveChanges();
+            _breadRepository.AddBatch(breads);
+            _breadRepository.Save();
         }
     }
 
     public override void AddCustomer()
-    {
-        if (_dbContext.Database.CanConnect() && !_dbContext.Customers.Any())
+    {      
+        if (_customerRepository == null)
         {
-            var customers = GetCustomer();
-            _dbContext.Customers.AddRange(customers);
-            _dbContext.SaveChanges();
+        var customers = GetCustomer();
+        _customerRepository.AddBatch(customers);
+        _customerRepository.Save();
         }
     }
 }

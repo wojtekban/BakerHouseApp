@@ -3,7 +3,7 @@
 public class ListRepository<T> : IRepository<T> where T : class, IEntity, new()
 {
     private readonly List<T> _items = new();
-    private readonly string path = $@"C:\Users\Wojtek\source\repos\wojtekban\BakerHouseApp\DataAccess\Resources\Files\{typeof(T).Name}_save.json";
+    private readonly string path = $"{typeof(T).Name}_save.json";
     private int lastUsedId = 1;
 
     public event EventHandler<T>? ItemAdded;

@@ -17,10 +17,7 @@ services.AddSingleton<ICsvProvider, CsvProvider>();
 services.AddSingleton<IRepository<Bread>, SqlRepository<Bread>>();
 services.AddSingleton<IRepository<Customer>, SqlRepository<Customer>>();
 services.AddSingleton<IDataGeneration, DataGenerationSql>();
-services.AddDbContext<BakerHouseAppDbContext>(options => options
-    .UseSqlServer("Data Source =.\\SQLEXPRESS; Initial Catalog = BakerHouseAppStorage; Integrated Security = True; Connect Timeout = 30; Encrypt = True; Trust Server Certificate=True; Application Intent = ReadWrite; Multi Subnet Failover=False;"));
-
-
+services.AddDbContext<BakerHouseAppDbContext>();
 var servicesProvider = services.BuildServiceProvider();
 var app = servicesProvider.GetService<IApp>()!;
 app.Run();

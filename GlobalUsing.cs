@@ -2,6 +2,7 @@
 global using BakerHouseApp.UI;
 global using System.Text;
 global using Microsoft.EntityFrameworkCore;
+global using Microsoft.Extensions.Configuration;
 global using BakerHouseApp.DataAccess.Data.Entities;
 global using BakerHouseApp.DataAccess.Data;
 global using BakerHouseApp.DataAccess.Data.Repositores;
@@ -14,4 +15,5 @@ global using System.Globalization;
 global using System.Text.Json;
 global using System.Xml.Linq;
 global using System.Numerics;
+
 

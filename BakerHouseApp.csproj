@@ -19,6 +19,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="DataAccess\Resources\Files\asortyment.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
